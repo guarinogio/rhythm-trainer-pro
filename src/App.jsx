@@ -70,7 +70,7 @@ export default function App() {
       generatePattern({
         length: GAME_BLOCK_LENGTH,
         studyMode,
-        difficulty: 3,
+        difficulty: getScaledDifficulty(difficulty, blockIndex),
       })
     );
   }
@@ -188,7 +188,7 @@ export default function App() {
           backingStyle={backingStyle}
           setBackingStyle={setBackingStyle}
           practiceRepeats={practiceRepeats}
-                  setPracticeRepeats={setPracticeRepeats}
+          setPracticeRepeats={setPracticeRepeats}
           studyMode={studyMode}
           setStudyMode={setStudyMode}
           difficulty={difficulty}
