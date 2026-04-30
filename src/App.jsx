@@ -9,6 +9,14 @@ import { DIFFICULTIES } from "./lib/rhythmCatalog.js";
 
 const GAME_BLOCK_LENGTH = 8;
 const QUEUE_BLOCKS = 512;
+const LEVEL_ORDER = ["level1", "level2", "level3", "level4", "level5"];
+
+function getScaledDifficulty(startDifficulty, blockIndex) {
+  const startIndex = Math.max(0, LEVEL_ORDER.indexOf(startDifficulty));
+  const levelIncrease = Math.floor(blockIndex / 3);
+  const nextIndex = Math.min(LEVEL_ORDER.length - 1, startIndex + levelIncrease);
+  return LEVEL_ORDER[nextIndex];
+}
 
 export default function App() {
   const [bpm, setBpm] = useState(80);
@@ -22,7 +30,7 @@ export default function App() {
   const [bassEnabled, setBassEnabled] = useState(true);
   const [bassVolume, setBassVolume] = useState(35);
   const [backingStyle, setBackingStyle] = useState("jazz");
-  const [practiceRepeats, setPracticeRepeats] = useState(3);
+  const [practiceRepeats, setPracticeRepeats] = useState(1);
   const [studyMode, setStudyMode] = useState("clapping");
   const [difficulty, setDifficulty] = useState("level1");
 
@@ -58,8 +66,12 @@ export default function App() {
   }, []);
 
   function makeBlocks() {
-    return Array.from({ length: QUEUE_BLOCKS }, () =>
-      generatePattern({ length: GAME_BLOCK_LENGTH, studyMode, difficulty })
+    return Array.from({ length: QUEUE_BLOCKS }, (_, blockIndex) =>
+      generatePattern({
+        length: GAME_BLOCK_LENGTH,
+        studyMode,
+        difficulty: getScaledDifficulty(difficulty, blockIndex),
+      })
     );
   }
 
