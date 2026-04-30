@@ -13,7 +13,7 @@ const LEVEL_ORDER = ["level1", "level2", "level3", "level4", "level5"];
 
 function getScaledDifficulty(startDifficulty, blockIndex) {
   const startIndex = Math.max(0, LEVEL_ORDER.indexOf(startDifficulty));
-  const levelIncrease = Math.floor(blockIndex / difficultyStep);
+  const levelIncrease = Math.floor(blockIndex / 3);
   const nextIndex = Math.min(LEVEL_ORDER.length - 1, startIndex + levelIncrease);
   return LEVEL_ORDER[nextIndex];
 }
@@ -31,7 +31,6 @@ export default function App() {
   const [bassVolume, setBassVolume] = useState(35);
   const [backingStyle, setBackingStyle] = useState("jazz");
   const [practiceRepeats, setPracticeRepeats] = useState(1);
-const [difficultyStep, setDifficultyStep] = useState(3);
   const [studyMode, setStudyMode] = useState("clapping");
   const [difficulty, setDifficulty] = useState("level1");
 
@@ -71,7 +70,7 @@ const [difficultyStep, setDifficultyStep] = useState(3);
       generatePattern({
         length: GAME_BLOCK_LENGTH,
         studyMode,
-        difficulty: getScaledDifficulty(difficulty, blockIndex),
+        difficulty: 3,
       })
     );
   }
@@ -189,9 +188,7 @@ const [difficultyStep, setDifficultyStep] = useState(3);
           backingStyle={backingStyle}
           setBackingStyle={setBackingStyle}
           practiceRepeats={practiceRepeats}
-        difficultyStep={difficultyStep}
-          setPracticeRepeats={setPracticeRepeats}
-        setDifficultyStep={setDifficultyStep}
+                  setPracticeRepeats={setPracticeRepeats}
           studyMode={studyMode}
           setStudyMode={setStudyMode}
           difficulty={difficulty}
