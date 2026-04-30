@@ -1,0 +1,236 @@
+export const MIN_BEATS = 4;
+export const MAX_BEATS = 40;
+
+export const STUDY_MODES = {
+  clapping: {
+    id: "clapping",
+    label: "Clapping",
+    description: "Short, percussive rhythms for hands or table tapping.",
+  },
+  voice: {
+    id: "voice",
+    label: "Voice / Ta",
+    description: "Vocal rhythm syllables with sustained sounds when appropriate.",
+  },
+};
+
+export const DIFFICULTIES = {
+  level1: {
+    id: "level1",
+    label: "Level 1 · Pulse",
+    description: "Quarter notes and rests.",
+  },
+  level2: {
+    id: "level2",
+    label: "Level 2 · Eighths",
+    description: "Adds two eighth notes.",
+  },
+  level3: {
+    id: "level3",
+    label: "Level 3 · Sixteenths",
+    description: "Adds common sixteenth-note groups.",
+  },
+  level4: {
+    id: "level4",
+    label: "Level 4 · Triplets & dotted",
+    description: "Adds triplets and dotted rhythms.",
+  },
+  level5: {
+    id: "level5",
+    label: "Level 5 · Syncopation",
+    description: "Adds internal rests and syncopated cells.",
+  },
+};
+
+export const RHYTHMS = {
+  rest: {
+    id: "rest",
+    symbol: "—",
+    label: "Rest",
+    clappingText: "Rest",
+    voiceText: "Rest",
+    subdivisions: ["rest"],
+    events: [],
+  },
+  quarter: {
+    id: "quarter",
+    symbol: "♩",
+    label: "Quarter",
+    clappingText: "Clap",
+    voiceText: "Ta",
+    subdivisions: ["hit"],
+    events: [{ at: 0, duration: 0.12, accent: 1 }],
+  },
+  eighths: {
+    id: "eighths",
+    symbol: "♫",
+    label: "Two eighths",
+    clappingText: "Clap-clap",
+    voiceText: "Ta-ka",
+    subdivisions: ["hit", "hit"],
+    events: [
+      { at: 0, duration: 0.08, accent: 1 },
+      { at: 0.5, duration: 0.08, accent: 0.75 },
+    ],
+  },
+  fourSixteenths: {
+    id: "fourSixteenths",
+    symbol: "♬♬",
+    label: "Four sixteenths",
+    clappingText: "Clap-clap-clap-clap",
+    voiceText: "Ta-ka-di-mi",
+    subdivisions: ["hit", "hit", "hit", "hit"],
+    events: [
+      { at: 0, duration: 0.055, accent: 1 },
+      { at: 0.25, duration: 0.055, accent: 0.62 },
+      { at: 0.5, duration: 0.055, accent: 0.75 },
+      { at: 0.75, duration: 0.055, accent: 0.62 },
+    ],
+  },
+  eighthTwoSixteenths: {
+    id: "eighthTwoSixteenths",
+    symbol: "♪♬",
+    label: "Eighth + two sixteenths",
+    clappingText: "Clap — clap-clap",
+    voiceText: "Ta — ka-di",
+    subdivisions: ["hit", "hold", "hit", "hit"],
+    events: [
+      { at: 0, duration: 0.11, accent: 1 },
+      { at: 0.5, duration: 0.055, accent: 0.75 },
+      { at: 0.75, duration: 0.055, accent: 0.65 },
+    ],
+  },
+  twoSixteenthsEighth: {
+    id: "twoSixteenthsEighth",
+    symbol: "♬♪",
+    label: "Two sixteenths + eighth",
+    clappingText: "Clap-clap — clap",
+    voiceText: "Ta-ka — di",
+    subdivisions: ["hit", "hit", "hold", "hit"],
+    events: [
+      { at: 0, duration: 0.055, accent: 1 },
+      { at: 0.25, duration: 0.055, accent: 0.65 },
+      { at: 0.5, duration: 0.11, accent: 0.75 },
+    ],
+  },
+  triplet: {
+    id: "triplet",
+    symbol: "♬₃",
+    label: "Triplet",
+    clappingText: "Clap-clap-clap",
+    voiceText: "Ta-ki-da",
+    subdivisions: ["hit", "hit", "hit"],
+    events: [
+      { at: 0, duration: 0.06, accent: 1 },
+      { at: 1 / 3, duration: 0.06, accent: 0.7 },
+      { at: 2 / 3, duration: 0.06, accent: 0.7 },
+    ],
+  },
+  dottedEighthSixteenth: {
+    id: "dottedEighthSixteenth",
+    symbol: "♪.♬",
+    label: "Dotted eighth + sixteenth",
+    clappingText: "Clap — — clap",
+    voiceText: "Taa-ka",
+    subdivisions: ["hit", "hold", "hold", "hit"],
+    events: [
+      { at: 0, duration: 0.32, accent: 1 },
+      { at: 0.75, duration: 0.055, accent: 0.8 },
+    ],
+  },
+  eighthRestEighth: {
+    id: "eighthRestEighth",
+    symbol: "♪ 𝄾 ♪",
+    label: "Eighth rest eighth",
+    clappingText: "Clap — clap",
+    voiceText: "Ta — ka",
+    subdivisions: ["hit", "rest", "hit"],
+    events: [
+      { at: 0, duration: 0.08, accent: 1 },
+      { at: 0.5, duration: 0.08, accent: 0.8 },
+    ],
+  },
+  half: {
+    id: "half",
+    symbol: "𝅗𝅥",
+    label: "Half note",
+    clappingText: "Clap",
+    voiceText: "Taa",
+    subdivisions: ["hit"],
+    voiceOnly: true,
+    events: [{ at: 0, duration: 0.88, accent: 1 }],
+  },
+};
+
+export const POOLS = {
+  clapping: {
+    level1: ["quarter", "quarter", "quarter", "rest"],
+    level2: ["quarter", "quarter", "eighths", "eighths", "rest", "rest"],
+    level3: [
+      "quarter",
+      "eighths",
+      "fourSixteenths",
+      "eighthTwoSixteenths",
+      "twoSixteenthsEighth",
+      "rest",
+      "rest",
+    ],
+    level4: [
+      "quarter",
+      "eighths",
+      "fourSixteenths",
+      "eighthTwoSixteenths",
+      "twoSixteenthsEighth",
+      "triplet",
+      "dottedEighthSixteenth",
+      "rest",
+      "rest",
+    ],
+    level5: [
+      "quarter",
+      "quarter",
+      "eighths",
+      "eighths",
+      "fourSixteenths",
+      "eighthTwoSixteenths",
+      "twoSixteenthsEighth",
+      "triplet",
+      "dottedEighthSixteenth",
+      "eighthRestEighth",
+      "rest",
+      "rest",
+    ],
+  },
+  voice: {
+    level1: ["quarter", "quarter", "rest"],
+    level2: ["quarter", "quarter", "eighths", "half", "rest"],
+    level3: [
+      "quarter",
+      "eighths",
+      "fourSixteenths",
+      "eighthTwoSixteenths",
+      "twoSixteenthsEighth",
+      "half",
+      "rest",
+    ],
+    level4: [
+      "quarter",
+      "eighths",
+      "fourSixteenths",
+      "triplet",
+      "dottedEighthSixteenth",
+      "half",
+      "rest",
+    ],
+    level5: [
+      "quarter",
+      "eighths",
+      "fourSixteenths",
+      "triplet",
+      "dottedEighthSixteenth",
+      "eighthRestEighth",
+      "half",
+      "rest",
+    ],
+  },
+};
