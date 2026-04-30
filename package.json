@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
@@ -16,5 +18,9 @@
     "soundfont-player": "^0.12.0",
     "tone": "^15.1.22",
     "vite": "latest"
-  }
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  },
+  "homepage": "https://guarinogio.github.io/rhythm-trainer-pro"
 }
